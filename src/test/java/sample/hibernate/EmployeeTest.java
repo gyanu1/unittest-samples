@@ -41,17 +41,17 @@ public class EmployeeTest {
 	Employee emp1 = new Employee("gyanu", "maharjan", (java.util.Date) new Date(), "9841497163");
 
 	emp1 = empDao.saveOrUpdate(emp1);
-	assertThat(1L, is(emp1.getId()));
+	assertThat(emp1.getId(), is(1L));
 	assertEquals("gyanu", emp1.getFirstname());
 	emp1.setFirstname("Ramesh");
 
 	emp1 = empDao.saveOrUpdate(emp1);
-	assertThat(1L, is(emp1.getId()));
+	assertThat(emp1.getId(), is(1L));
 	assertEquals("Ramesh", emp1.getFirstname());
 	Employee emp2 = new Employee("ranjan", "baral", (java.util.Date) new Date(), "9841497163");
 
 	emp2 = empDao.saveOrUpdate(emp2);
-	assertThat(2L, is(emp2.getId()));
+	assertThat(emp2.getId(), is(3L));
 	assertEquals("ranjan", emp2.getFirstname());
     }
 

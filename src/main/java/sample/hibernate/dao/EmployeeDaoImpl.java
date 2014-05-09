@@ -35,7 +35,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @SuppressWarnings("unchecked")
     @Override
     public List<Employee> getAll() {
-	Session session = sessionFactory.openSession();
+	Session session = sessionFactory.getCurrentSession();
 	return session.createCriteria(Employee.class).list();
     }
 

@@ -9,8 +9,8 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import sample.hibernate.dao.EmployeeDao;
@@ -25,12 +25,12 @@ import sample.hibernate.model.Employee;
  * **/
 
 public class EmployeeTest {
-    private EmployeeDao empDao;
-    private SessionFactory sessionFactory;
-    private Transaction transaction;
+    static EmployeeDao empDao;
+    static SessionFactory sessionFactory;
+    static Transaction transaction;
 
-    @Before
-    public void setup() {
+    @BeforeClass
+    public static void setup() {
 	sessionFactory = HibernateUtility.getSessionFactory();
 	empDao = new EmployeeDaoImpl(sessionFactory);
 	transaction = sessionFactory.getCurrentSession().beginTransaction();
@@ -51,18 +51,19 @@ public class EmployeeTest {
 	Employee emp2 = new Employee("ranjan", "baral", (java.util.Date) new Date(), "9841497163");
 
 	emp2 = empDao.saveOrUpdate(emp2);
-	assertThat(emp2.getId(), is(3L));
+	assertThat(emp2.getId(), is(2L));
 	assertEquals("ranjan", emp2.getFirstname());
+
     }
 
     @Test
     public void verifyEmptyData() {
 	List<Employee> empList = empDao.getAll();
-	assertThat(empList.size(), is(0));
+	assertThat(empList.size(), is(2));
     }
 
-    @After
-    public void tearDown() {
+    @AfterClass
+    public static void tearDown() {
 	transaction.rollback();
     }
 
